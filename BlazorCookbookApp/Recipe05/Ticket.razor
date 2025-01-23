@@ -1,0 +1,34 @@
+﻿@* Modify the Ticket markup so that you can render values from parameters: *@
+
+<div class="ticket">
+    <div class="name">@Tariff</div>
+    <div class="price">
+        @(Price.ToString("0.00 $"))
+    </div>
+    <div class="ticket-actions">
+        <button @onclick="@OnAdded">
+            Add to cart
+        </button>
+    </div>
+</div>
+
+@* declare parameters in the @code block: *@
+@code {
+   
+// Encapsulation:
+
+// [Parameter] allows child components to control how data is displayed without knowing where the data comes from.
+// This block is part of a Blazor component's code-behind section
+    [Parameter, EditorRequired]    
+    public string Tariff { get; set; }
+    [Parameter, EditorRequired]
+    public decimal Price { get; set; }
+    [Parameter] public EventCallback OnAdded { get; set; }
+
+}
+@* OnAdded allows the parent component to pass a method (callback) that gets triggered
+when the child component emits an event. In this case, it corresponds to the "Add to cart" button click
+Defined in Parent: The parent passes a method to handle this event: *@
+
+
+
